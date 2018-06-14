@@ -53,17 +53,6 @@ app.use(function(req, res, next) {
 //     res.send(value);
 // }
 
-// var recipeModel = require('./models/recipe/recipe.model.server');
-// recipeModel.createRecipe({
-//     name: "recipe1",
-//     ingredients: "onions\npotaotes\ntomatoes",
-// })
-//
-//
-// recipeModel
-//     .findAllRecipes()
-//     .then(recipes => console.log(recipes));
-
 var recipeService = require('./services/recipe.service.server');
 recipeService(app);
 
