@@ -6,8 +6,13 @@ function createUser(user) {
   return userModel.create(user);
 }
 
+function findUserByCredentials(credentials) {
+  return userModel.findOne(credentials, {username: 1});
+}
+
 var api ={
-  createUser
+  createUser,
+  findUserByCredentials
 };
 
 module.exports = api;
