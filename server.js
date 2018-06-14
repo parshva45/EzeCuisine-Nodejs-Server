@@ -54,6 +54,8 @@ app.use(function(req, res, next) {
 // }
 
 var recipeService = require('./services/recipe.service.server');
+var userService = require('./services/user.service.server');
 recipeService(app);
+userService(app);
 
 app.listen(4000);
