@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var recipeSchema = require('./recipe.schema.server');
-var recipeModel = mongoose.model('recipeModel', recipeSchema);
+var recipeModel = mongoose.model('RecipeModel', recipeSchema);
 
 function createRecipe(recipe) {
     return recipeModel.create(recipe);
