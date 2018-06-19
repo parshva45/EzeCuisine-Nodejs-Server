@@ -30,9 +30,7 @@ app.use(session({
     secret: 'any string'
 }));
 
-var recipeService = require('./services/recipe.service.server');
-var userService = require('./services/user.service.server');
-recipeService(app);
-userService(app);
+require('./services/recipe.service.server')(app);
+require('./services/user.service.server')(app);
 
 app.listen(process.env.PORT || 4000);
