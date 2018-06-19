@@ -23,6 +23,10 @@ app.use(function(req, res, next) {
     next();
 });
 
+app.get('/', function (req, res) {
+    res.send('Hello World')
+})
+
 var session = require('express-session')
 app.use(session({
     resave: false,
