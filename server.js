@@ -2,7 +2,8 @@ var express = require('express')
 var bodyParser = require('body-parser');
 var app = express()
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://heroku_rpffmd6b:1hs699jm9ge6ugk7nsqe1afkr0@ds163410.mlab.com:63410/heroku_rpffmd6b');
+// mongoose.connect('mongodb://heroku_rpffmd6b:1hs699jm9ge6ugk7nsqe1afkr0@ds163410.mlab.com:63410/heroku_rpffmd6b');
+mongoose.connect('mongodb://localhost/eze-cuisine')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

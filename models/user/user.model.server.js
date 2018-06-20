@@ -7,12 +7,27 @@ function createUser(user) {
 }
 
 function findUserByCredentials(credentials) {
-  return userModel.findOne(credentials, {username: 1});
+  return userModel.findOne(credentials, {password: 0});
+}
+
+function updateUser(userId,newUser) {
+    return userModel.update({
+        _id:userId
+    },{
+        $set: {
+            username: newUser.username,
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
+            email: newUser.email,
+            role: newUser.role
+        }
+    });
 }
 
 var api ={
   createUser,
-  findUserByCredentials
+  findUserByCredentials,
+  updateUser
 };
 
 module.exports = api;

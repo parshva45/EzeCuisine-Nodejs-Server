@@ -3,6 +3,7 @@ module.exports = function (app) {
   app.get('/api/profile', profile);
   app.post('/api/logout', logout);
   app.post('/api/login', login);
+  app.put('/api/profile', updateProfile);
 
   var userModel = require('../models/user/user.model.server');
 
@@ -23,6 +24,19 @@ module.exports = function (app) {
   function logout(req, res) {
     req.session.destroy();
     res.sendStatus(200);
+  }
+
+  function updateProfile(req,res) {
+      var currentUser = req.session['currentUser'];
+      var userId = currentUser['_id'];
+      var newUser = req.body;
+
+      userModel
+          .updateUser(userId,newUser)
+          .then(status => {
+              req.session['currentUser'] = newUser;
+              res.send(status)
+          });
   }
 
   function createUser(req,res) {
