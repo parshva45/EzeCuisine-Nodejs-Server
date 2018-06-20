@@ -2,7 +2,7 @@ var express = require('express')
 var bodyParser = require('body-parser');
 var app = express()
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://heroku_sw319lv0:l8s8dg9268nt01dmpsb8lnofb4@ds263710.mlab.com:63710/heroku_sw319lv0');
+mongoose.connect('mongodb://heroku_rpffmd6b:1hs699jm9ge6ugk7nsqe1afkr0@ds163410.mlab.com:63410/heroku_rpffmd6b');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -26,9 +26,9 @@ app.use(function(req, res, next) {
 
 app.get('/', function (req, res) {
     res.send('Hello World')
-})
+});
 
-var session = require('express-session')
+var session = require('express-session');
 app.use(session({
     resave: false,
     saveUninitialized: true,

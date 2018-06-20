@@ -1,22 +1,22 @@
 module.exports = function (app) {
-    app.post('/api/recipe', createRecipe)
-    app.get('/api/recipe', findAllRecipes)
-    app.get('/api/recipe/:yummlyId', findRecipeByYummlyId)
+    app.post('/api/recipe', createRecipe);
+    app.get('/api/recipe', findAllRecipes);
+    app.get('/api/recipe/:yummlyId', findRecipeByYummlyId);
 
-    app.post('/api/recipe/:recipeId/like', likeRecipe)
-    app.get('/api/user/likedRecipe',findLikedRecipesForUser)
-    app.get('/api/recipe/:recipeId/likedUser',findLikedUsersForRecipe)
+    app.post('/api/recipe/:recipeId/like', likeRecipe);
+    app.get('/api/user/likedRecipe',findLikedRecipesForUser);
+    app.get('/api/recipe/:recipeId/likedUser',findLikedUsersForRecipe);
 
-    app.post('/api/recipe/:recipeId/rating', rateRecipe)
-    app.get('/api/user/ratedRecipe',findRatedRecipesForUser)
-    app.get('/api/recipe/:recipeId/ratedUser',findRatedUsersForRecipe)
+    app.post('/api/recipe/:recipeId/rating', rateRecipe);
+    app.get('/api/user/ratedRecipe',findRatedRecipesForUser);
+    app.get('/api/recipe/:recipeId/ratedUser',findRatedUsersForRecipe);
 
     var recipeModel = require('../models/recipe/recipe.model.server');
     var likeModel = require('../models/like/like.model.server');
     var ratingModel = require('../models/rating/rating.model.server');
 
     function createRecipe(req,res) {
-        var recipe = req.body
+        var recipe = req.body;
         recipeModel.createRecipe(recipe)
             .then(recipe => res.send(recipe));
     }
