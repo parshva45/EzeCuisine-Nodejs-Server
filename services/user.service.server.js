@@ -10,15 +10,19 @@ module.exports = function (app) {
   function profile(req, res) {
       res.send(req.session['currentUser']);
   }
-
+  
   function login(req, res) {
-    var credentials = req.body;
-    userModel
-      .findUserByCredentials(credentials)
-      .then(function(user) {
-        req.session['currentUser'] = user;
-        res.json(user);
-      })
+      var credentials = req.body;
+      userModel
+          .findUserByCredentials(credentials)
+          .then(function(user) {
+              if (user !== null){
+                  req.session['currentUser'] = user;
+                  res.json(user);
+              }else{
+                  res.json({});
+              }
+          })
   }
 
   function logout(req, res) {
@@ -40,11 +44,16 @@ module.exports = function (app) {
   }
 
   function createUser(req,res) {
-    var user = req.body;
-    userModel.createUser(user)
-      .then(user => {
-        req.session['currentUser'] = user;
-        res.send(user)
-      });
+      var user = req.body;
+      userModel.findUserByUsername(user.username)
+          .then((users) => {
+              if(users.length === 0) {
+                  userModel.createUser(user)
+                      .then(user => {
+                          req.session['currentUser'] = user;
+                          res.send(user)
+                      });
+              }else res.send({})
+          });
   }
 }
