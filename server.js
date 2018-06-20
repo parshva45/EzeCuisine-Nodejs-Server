@@ -37,5 +37,8 @@ app.use(session({
 
 require('./services/recipe.service.server')(app);
 require('./services/user.service.server')(app);
+require('./services/like.service.server')(app);
+require('./services/rating.service.server')(app);
+
 
 app.listen(process.env.PORT || 4000);
