@@ -2,8 +2,8 @@ var express = require('express')
 var bodyParser = require('body-parser');
 var app = express()
 const mongoose = require('mongoose');
-// mongoose.connect('mongodb://heroku_rpffmd6b:1hs699jm9ge6ugk7nsqe1afkr0@ds163410.mlab.com:63410/heroku_rpffmd6b');
-mongoose.connect('mongodb://localhost/eze-cuisine')
+mongoose.connect('mongodb://heroku_rpffmd6b:1hs699jm9ge6ugk7nsqe1afkr0@ds163410.mlab.com:63410/heroku_rpffmd6b');
+// mongoose.connect('mongodb://localhost/eze-cuisine')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,6 +40,6 @@ require('./services/recipe.service.server')(app);
 require('./services/user.service.server')(app);
 require('./services/like.service.server')(app);
 require('./services/rating.service.server')(app);
-
+require('./services/follow.service.server')(app);
 
 app.listen(process.env.PORT || 4000);

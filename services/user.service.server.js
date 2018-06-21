@@ -1,6 +1,7 @@
 module.exports = function (app) {
   app.post('/api/user', createUser);
   app.get('/api/profile', profile);
+  app.get('/api/profile/:userId',getProfileOfUser)
   app.post('/api/logout', logout);
   app.post('/api/login', login);
   app.put('/api/profile', updateProfile);
@@ -10,7 +11,7 @@ module.exports = function (app) {
   function profile(req, res) {
       res.send(req.session['currentUser']);
   }
-  
+
   function login(req, res) {
       var credentials = req.body;
       userModel
@@ -23,6 +24,13 @@ module.exports = function (app) {
                   res.json({});
               }
           })
+  }
+
+  function getProfileOfUser(req,res) {
+      var userId = req.params['userId'];
+      userModel
+          .findUserById(userId)
+          .then(user => res.json(user));
   }
 
   function logout(req, res) {
