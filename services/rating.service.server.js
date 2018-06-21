@@ -36,11 +36,14 @@ module.exports = function (app) {
         var recipeId = req.params['recipeId'];
         var currentUser = req.session.currentUser;
         var userId = currentUser._id;
-        var ratingValue = req.body
-        var rating ={
+        var ratingObject = req.body;
+        var rating = {
             user: userId,
             recipe: recipeId,
-            rating: ratingValue['rating']
+            rating: ratingObject['rating']
+        };
+        if (ratingObject['review']){
+            rating['review'] =  ratingObject['review'];
         }
         ratingModel
             .rateRecipe(rating)
