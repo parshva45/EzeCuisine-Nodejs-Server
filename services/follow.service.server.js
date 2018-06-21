@@ -5,6 +5,8 @@ module.exports = function (app) {
     app.post('/api/user/:userId/follow', followUser);
     app.get('/api/user/:userId/following', getFollowing);
     app.get('/api/user/:userId/followers', getFollowers);
+    app.get('/api/user/following', getFollowingForCurrentUser);
+    app.get('/api/user/followers', getFollowersForCurrentUser);
 
     function followUser(req,res){
         var toUserId = req.params['userId'];
@@ -26,8 +28,24 @@ module.exports = function (app) {
             .then(following => res.json(following));
     }
 
+    function getFollowingForCurrentUser(req,res) {
+        var currentUser = req.session['currentUser'];
+        var userId = currentUser._id;
+        followModel
+            .getFollowing(userId)
+            .then(following => res.json(following));
+    }
+
     function getFollowers(req,res) {
         var userId = req.params['userId'];
+        followModel
+            .getFollowers(userId)
+            .then(followers=> res.json(followers));
+    }
+
+    function getFollowersForCurrentUser(req,res) {
+        var currentUser = req.session['currentUser'];
+        var userId = currentUser._id;
         followModel
             .getFollowers(userId)
             .then(followers=> res.json(followers));
