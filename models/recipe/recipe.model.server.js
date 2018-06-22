@@ -10,7 +10,7 @@ function findAllRecipes() {
     return recipeModel.find();
 }
 
-function findAllCreatedRecipes(userId) {
+function findAllCreatedRecipesForUser(userId) {
     return recipeModel.find({
         chef: userId
     });
@@ -32,7 +32,7 @@ var api ={
     findAllRecipes,
     findRecipeByYummlyId,
     findRecipesBySearchQuery,
-    findAllCreatedRecipes
+    findAllCreatedRecipesForUser
 }
 
 module.exports = api;
