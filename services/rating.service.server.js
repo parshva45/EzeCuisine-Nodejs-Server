@@ -1,6 +1,7 @@
 module.exports = function (app) {
 
     app.post('/api/recipe/:recipeId/rating', rateRecipe);
+    app.put('/api/recipe/:recipeId/rating', updateRatingForRecipe);
     app.get('/api/user/ratedRecipe',findRatedRecipesForCurrentUser);
     app.get('/api/user/:userId/ratedRecipe',findRatedRecipesForUser);
     app.get('/api/recipe/:recipeId/ratedUser',findRatedUsersForRecipe);
@@ -48,5 +49,9 @@ module.exports = function (app) {
         ratingModel
             .rateRecipe(rating)
             .then(response => res.json(response));
+    }
+
+    function updateRatingForRecipe(req, res) {
+        var recipeId = req.params['recipeId'];
     }
 }

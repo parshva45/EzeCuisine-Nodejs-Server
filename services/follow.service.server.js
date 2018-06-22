@@ -3,6 +3,7 @@ module.exports = function (app) {
     var followModel = require('../models/follow/follow.model.server');
 
     app.post('/api/user/:userId/follow', followUser);
+    app.delete('/api/user/:userId/unfollow', unfollowUser);
     app.get('/api/user/:userId/following', getFollowing);
     app.get('/api/user/:userId/followers', getFollowers);
     app.get('/api/user/following', getFollowingForCurrentUser);
@@ -18,6 +19,19 @@ module.exports = function (app) {
         }
         followModel
             .followUser(follow)
+            .then(response => res.json(response));
+    }
+
+    function unfollowUser(req,res) {
+        var toUserId = req.params['userId'];
+        var currentUser = req.session.currentUser;
+        var fromUserId = currentUser._id;
+        var unfollow ={
+            from: fromUserId,
+            to: toUserId
+        }
+        followModel
+            .unfollowUser(unfollow)
             .then(response => res.json(response));
     }
 

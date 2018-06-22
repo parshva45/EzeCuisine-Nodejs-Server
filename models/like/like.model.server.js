@@ -6,6 +6,10 @@ function likeRecipe(like) {
     return likeModel.create(like);
 }
 
+function unlikeRecipe(unlike) {
+    return likeModel.remove(unlike);
+}
+
 function findLikedRecipesForUser(userId) {
     return likeModel
         .find({user: userId})
@@ -23,7 +27,8 @@ function findLikedUsersForRecipe(recipeId) {
 var api ={
     likeRecipe,
     findLikedRecipesForUser,
-    findLikedUsersForRecipe
+    findLikedUsersForRecipe,
+    unlikeRecipe
 };
 
 module.exports = api;

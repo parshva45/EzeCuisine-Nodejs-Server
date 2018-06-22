@@ -4,7 +4,11 @@ var followModel = mongoose.model('FollowModel', followSchema);
 
 
 function followUser(follow) {
-    return followModel.create(follow)
+    return followModel.create(follow);
+}
+
+function unfollowUser(unfollow) {
+    return followModel.remove(unfollow);
 }
 
 function getFollowing(userId) {
@@ -24,7 +28,8 @@ function getFollowers(userId) {
 var api ={
     followUser,
     getFollowing,
-    getFollowers
+    getFollowers,
+    unfollowUser
 };
 
 module.exports = api;

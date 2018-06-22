@@ -4,6 +4,7 @@ module.exports = function (app) {
     var likeModel = require('../models/like/like.model.server');
 
     app.post('/api/recipe/:recipeId/like', likeRecipe);
+    app.delete('/api/recipe/:recipeId/unlike',unlikeRecipe)
     app.get('/api/user/likedRecipe',findLikedRecipesForCurrentUser);
     app.get('/api/user/:userId/likedRecipe',findLikedRecipesForUser);
     app.get('/api/recipe/:recipeId/likedUser',findLikedUsersForRecipe);
@@ -42,5 +43,18 @@ module.exports = function (app) {
             .likeRecipe(like)
             .then(response => res.json(response));
 
+    }
+
+    function unlikeRecipe(req,res) {
+        var recipeId = req.params['recipeId'];
+        var currentUser = req.session.currentUser;
+        var userId = currentUser._id;
+        var unlike ={
+            user: userId,
+            recipe: recipeId
+        }
+        likeModel
+            .unlikeRecipe(unlike)
+            .then(response => res.json(response));
     }
 }
