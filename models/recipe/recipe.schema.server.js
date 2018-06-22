@@ -8,7 +8,8 @@ var recipeSchema = mongoose.Schema({
   numberOfServings: Number,
   yummlyRating: Number,
   yummlyId: String,
-  createdBy: String
+  createdBy: String,
+  chef: {type: mongoose.Schema.Types.ObjectId, ref: 'UserModel'}
 }, {collection: 'recipe'});
 
 recipeSchema.index({'name':'text', 'ingredients': 'text'});

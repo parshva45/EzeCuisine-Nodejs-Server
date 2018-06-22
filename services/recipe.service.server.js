@@ -1,6 +1,7 @@
 module.exports = function (app) {
     app.post('/api/recipe', createRecipe);
     app.get('/api/recipe', findAllRecipes);
+    app.get('/api/user/createdRecipe', findAllCreatedRecipes);
     app.get('/api/recipe/search/:recipeSearchText', findRecipesBySearchQuery)
     app.get('/api/recipe/:yummlyId', findRecipeByYummlyId);
 
@@ -15,6 +16,13 @@ module.exports = function (app) {
     function findAllRecipes(req,res) {
         recipeModel.findAllRecipes()
             .then(recipes => res.send(recipes));
+    }
+
+    function findAllCreatedRecipes(req,res) {
+        var currentUser = req.session['currentUser'];
+        var userId = currentUser['_id'];
+        recipeModel.findAllCreatedRecipes(userId)
+            .then(recipes => res.json(recipes));
     }
 
     function findRecipesBySearchQuery(req,res) {

@@ -10,19 +10,29 @@ function findAllRecipes() {
     return recipeModel.find();
 }
 
+function findAllCreatedRecipes(userId) {
+    return recipeModel.find({
+        chef: userId
+    });
+}
+
 function findRecipeByYummlyId(yummlyId) {
     return recipeModel.findOne({yummlyId: yummlyId});
 }
 
 function findRecipesBySearchQuery(recipeSearchText) {
-    return recipeModel.find({$text: {$search: recipeSearchText}})
+    return recipeModel.find({
+        $text: {$search: recipeSearchText},
+        createdBy: 'Chef'
+    })
 }
 
 var api ={
     createRecipe,
     findAllRecipes,
     findRecipeByYummlyId,
-    findRecipesBySearchQuery
+    findRecipesBySearchQuery,
+    findAllCreatedRecipes
 }
 
 module.exports = api;
