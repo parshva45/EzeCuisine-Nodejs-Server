@@ -1,7 +1,7 @@
 module.exports = function (app) {
 
     app.post('/api/recipe/:recipeId/rating', rateRecipe);
-    app.put('/api/recipe/:recipeId/rating', updateRatingForRecipe);
+    app.put('/api/rating/:ratingId', updateRating);
     app.get('/api/user/ratedRecipe',findRatedRecipesForCurrentUser);
     app.get('/api/user/:userId/ratedRecipe',findRatedRecipesForUser);
     app.get('/api/recipe/:recipeId/ratedUser',findRatedUsersForRecipe);
@@ -51,7 +51,12 @@ module.exports = function (app) {
             .then(response => res.json(response));
     }
 
-    function updateRatingForRecipe(req, res) {
-        var recipeId = req.params['recipeId'];
+    function updateRating(req, res) {
+        var ratingId = req.params['ratingId'];
+        var ratingObject = req.body;
+        ratingModel
+            .updateRating(ratingId, ratingObject)
+            .then(status => res.send(status));
+
     }
 }

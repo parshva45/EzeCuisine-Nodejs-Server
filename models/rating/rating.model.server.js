@@ -6,6 +6,25 @@ function rateRecipe(rating) {
     return ratingModel.create(rating);
 }
 
+function updateRating(ratingId, ratingObject) {
+    if (ratingObject['review']) {
+        return ratingModel.update(
+            {_id: ratingId},{
+            $set: {
+                rating: ratingObject['rating'],
+                review: ratingObject['review']
+            }
+        })
+    } else {
+        return ratingModel.update(
+            {_id: ratingId},{
+            $set: {
+                rating: ratingObject['rating'],
+            }
+        })
+    }
+}
+
 function findRatedRecipesForUser(userId) {
     return ratingModel
         .find({user: userId})
@@ -23,7 +42,8 @@ function findRatedUsersForRecipe(recipeId) {
 var api ={
     rateRecipe,
     findRatedRecipesForUser,
-    findRatedUsersForRecipe
+    findRatedUsersForRecipe,
+    updateRating
 };
 
 module.exports = api;
