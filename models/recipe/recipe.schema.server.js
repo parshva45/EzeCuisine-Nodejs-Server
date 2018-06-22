@@ -7,8 +7,11 @@ var recipeSchema = mongoose.Schema({
   totalTime: String,
   numberOfServings: Number,
   yummlyRating: Number,
-  yummlyId: String
+  yummlyId: String,
+  createdBy: String
 }, {collection: 'recipe'});
+
+recipeSchema.index({'name':'text', 'ingredients': 'text'});
 
 module.exports = recipeSchema;
 
