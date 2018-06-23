@@ -6,7 +6,6 @@ module.exports = function (app) {
     app.get('/api/user/:userId/ratedRecipe',findRatedRecipesForUser);
     app.get('/api/recipe/:recipeId/ratedUser',findRatedUsersForRecipe);
 
-    var recipeModel = require('../models/recipe/recipe.model.server');
     var ratingModel = require('../models/rating/rating.model.server');
 
     function findRatedRecipesForCurrentUser(req,res) {

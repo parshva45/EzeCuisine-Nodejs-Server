@@ -31,13 +31,18 @@ function findRecipesBySearchQuery(recipeSearchText) {
     })
 }
 
+function deleteRecipe(recipeId) {
+    return recipeModel.remove({_id: recipeId});
+}
+
 var api ={
     createRecipe,
     findAllRecipes,
     findRecipeByYummlyId,
     findRecipesBySearchQuery,
     findAllCreatedRecipesForUser,
-    findRecipeById
+    findRecipeById,
+    deleteRecipe
 }
 
 module.exports = api;
