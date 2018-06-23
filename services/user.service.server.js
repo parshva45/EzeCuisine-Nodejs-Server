@@ -1,6 +1,7 @@
 module.exports = function (app) {
   app.post('/api/user', createUser);
   app.get('/api/profile', profile);
+  app.get('/api/user', findAllUsers);
   app.get('/api/profile/:username',getProfileOfUser)
   app.post('/api/logout', logout);
   app.post('/api/login', login);
@@ -49,6 +50,11 @@ module.exports = function (app) {
               req.session['currentUser'] = newUser;
               res.send(status)
           });
+  }
+
+  function findAllUsers(req,res) {
+    userModel.findAllUsers()
+        .then(users => res.json(users));
   }
 
   function createUser(req,res) {

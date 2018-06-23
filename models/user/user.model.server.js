@@ -10,6 +10,10 @@ function findUserByCredentials(credentials) {
     return userModel.findOne(credentials, {password: 0});
 }
 
+function findAllUsers() {
+    return userModel.find();
+}
+
 function findUserById(userId) {
     return userModel.findOne({_id: userId});
 }
@@ -42,7 +46,8 @@ var api ={
   updateUser,
   findUserByUsername,
   deleteUser,
-  findUserById
+  findUserById,
+  findAllUsers
 };
 
 module.exports = api;
