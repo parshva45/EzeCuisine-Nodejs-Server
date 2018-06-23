@@ -6,7 +6,7 @@ module.exports = function (app) {
   app.post('/api/logout', logout);
   app.post('/api/login', login);
   app.put('/api/profile', updateProfile);
-  app.delete('api/user/:userId', deleteUser)
+  app.delete('/api/user/:userId', deleteUser);
 
   var userModel = require('../models/user/user.model.server');
   var likeModel = require('../models/like/like.model.server');

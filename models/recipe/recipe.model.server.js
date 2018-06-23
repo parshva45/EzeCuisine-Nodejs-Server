@@ -31,6 +31,14 @@ function findRecipesBySearchQuery(recipeSearchText) {
     })
 }
 
+function findAllRecipesForChef(userId) {
+    return recipeModel.find({chef: userId});
+}
+
+function deleteRecipesForChef(userId) {
+    return recipeModel.remove({chef: userId});
+}
+
 function deleteRecipe(recipeId) {
     return recipeModel.remove({_id: recipeId});
 }
@@ -57,7 +65,9 @@ var api ={
     findAllCreatedRecipesForUser,
     findRecipeById,
     deleteRecipe,
-    updateRecipe
+    updateRecipe,
+    findAllRecipesForChef,
+    deleteRecipesForChef
 }
 
 module.exports = api;
