@@ -14,6 +14,10 @@ function deleteLikesForRecipe(recipeId) {
     return likeModel.remove({recipe: recipeId});
 }
 
+function deleteLikesForUser(userId) {
+    return likeModel.remove({user: userId});
+}
+
 function findLikedRecipesForUser(userId) {
     return likeModel
         .find({user: userId})
@@ -33,7 +37,8 @@ var api ={
     findLikedRecipesForUser,
     findLikedUsersForRecipe,
     unlikeRecipe,
-    deleteLikesForRecipe
+    deleteLikesForRecipe,
+    deleteLikesForUser
 };
 
 module.exports = api;

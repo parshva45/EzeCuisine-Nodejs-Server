@@ -6,8 +6,12 @@ module.exports = function (app) {
   app.post('/api/logout', logout);
   app.post('/api/login', login);
   app.put('/api/profile', updateProfile);
+  app.delete('api/user/:userId', deleteUser)
 
   var userModel = require('../models/user/user.model.server');
+  var likeModel = require('../models/like/like.model.server');
+  var ratingModel = require('../models/rating/rating.model.server');
+  var followModel = require('../models/follow/follow.model.server');
 
   function profile(req, res) {
       res.send(req.session['currentUser']);
@@ -35,8 +39,8 @@ module.exports = function (app) {
   }
 
   function logout(req, res) {
-    req.session.destroy();
-    res.sendStatus(200);
+      req.session.destroy();
+      res.sendStatus(200);
   }
 
   function updateProfile(req,res) {
@@ -69,5 +73,15 @@ module.exports = function (app) {
                       });
               }else res.send({})
           });
+  }
+
+  function deleteUser(req,res) {
+      var userId = req.params['userId'];
+      likeModel.deleteLikesForUser(userId)
+          .then(() => ratingModel.deleteRatingsForUser(userId))
+          .then(() => followModel.deleteFollowingsForUser(userId))
+          .then(() => followModel.deleteFollowersForUser(userId))
+          .then(() => userModel.deleteUser(userId))
+          .then(response => res.send(response));
   }
 }

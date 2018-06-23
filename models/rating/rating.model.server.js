@@ -10,6 +10,10 @@ function deleteRatingsForRecipe(recipeId) {
     return ratingModel.remove({recipe: recipeId});
 }
 
+function deleteRatingsForUser(userId) {
+    return ratingModel.remove({user: userId});
+}
+
 function updateRating(ratingId, ratingObject) {
     if (ratingObject['review']) {
         return ratingModel.update(
@@ -48,7 +52,8 @@ var api ={
     findRatedRecipesForUser,
     findRatedUsersForRecipe,
     updateRating,
-    deleteRatingsForRecipe
+    deleteRatingsForRecipe,
+    deleteRatingsForUser
 };
 
 module.exports = api;

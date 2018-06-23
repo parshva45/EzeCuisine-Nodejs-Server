@@ -11,6 +11,14 @@ function unfollowUser(unfollow) {
     return followModel.remove(unfollow);
 }
 
+function deleteFollowingsForUser(userId) {
+    return followModel.remove({from: userId});
+}
+
+function deleteFollowersForUser(userId) {
+    return followModel.remove({to: userId});
+}
+
 function getFollowing(userId) {
     return followModel
         .find({from: userId})
@@ -29,7 +37,9 @@ var api ={
     followUser,
     getFollowing,
     getFollowers,
-    unfollowUser
+    unfollowUser,
+    deleteFollowersForUser,
+    deleteFollowingsForUser
 };
 
 module.exports = api;
