@@ -35,6 +35,20 @@ function deleteRecipe(recipeId) {
     return recipeModel.remove({_id: recipeId});
 }
 
+function updateRecipe(recipeId, newRecipe) {
+    return recipeModel.update({
+        _id: recipeId
+    },{
+        $set: {
+            name: newRecipe['name'],
+            ingredients: newRecipe['ingredients'],
+            totalTime: newRecipe['totalTime'],
+            numberOfServings: newRecipe['numberOfServings'],
+            imageUrl: newRecipe['imageUrl']
+        }
+    })
+}
+
 var api ={
     createRecipe,
     findAllRecipes,
@@ -42,7 +56,8 @@ var api ={
     findRecipesBySearchQuery,
     findAllCreatedRecipesForUser,
     findRecipeById,
-    deleteRecipe
+    deleteRecipe,
+    updateRecipe
 }
 
 module.exports = api;

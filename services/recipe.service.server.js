@@ -6,7 +6,8 @@ module.exports = function (app) {
     app.get('/api/recipe/search/:recipeSearchText', findRecipesBySearchQuery)
     app.get('/api/recipe/yummly/:yummlyId', findRecipeByYummlyId);
     app.get('/api/recipe/:recipeId', findRecipeById);
-    app.delete('/api/recipe/:recipeId', deleteRecipe)
+    app.delete('/api/recipe/:recipeId', deleteRecipe);
+    app.put('/api/recipe/:recipeId', updateRecipe);
 
     var recipeModel = require('../models/recipe/recipe.model.server');
     var likeModel = require('../models/like/like.model.server');
@@ -24,6 +25,13 @@ module.exports = function (app) {
             .then(() => ratingModel.deleteRatingsForRecipe(recipeId))
             .then(() => recipeModel.deleteRecipe(recipeId))
             .then(response => res.send(response));
+    }
+
+    function updateRecipe(req,res) {
+        var recipeId = req.params['recipeId'];
+        var recipeObject = req.body;
+        recipeModel.updateRecipe(recipeId,recipeObject)
+            .then(status => res.send(status));
     }
 
     function findAllRecipes(req,res) {
