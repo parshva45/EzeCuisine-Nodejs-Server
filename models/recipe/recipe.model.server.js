@@ -20,6 +20,10 @@ function findRecipeByYummlyId(yummlyId) {
     return recipeModel.findOne({yummlyId: yummlyId});
 }
 
+function findRecipeById(recipeId) {
+    return recipeModel.findOne({_id: recipeId});
+}
+
 function findRecipesBySearchQuery(recipeSearchText) {
     return recipeModel.find({
         $text: {$search: recipeSearchText},
@@ -32,7 +36,8 @@ var api ={
     findAllRecipes,
     findRecipeByYummlyId,
     findRecipesBySearchQuery,
-    findAllCreatedRecipesForUser
+    findAllCreatedRecipesForUser,
+    findRecipeById
 }
 
 module.exports = api;
