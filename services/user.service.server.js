@@ -1,6 +1,7 @@
 module.exports = function (app) {
   app.post('/api/user', createUser);
   app.post('/api/admin/user' ,createUserByAdmin)
+  app.put('/api/admin/user/:userId' ,updateUserByAdmin)
   app.get('/api/profile', profile);
   app.get('/api/user', findAllUsers);
   app.get('/api/profile/:username',getProfileOfUser)
@@ -56,6 +57,17 @@ module.exports = function (app) {
               res.send(status)
           });
   }
+
+    function updateUserByAdmin(req,res) {
+        var userId = req.params['userId'];
+        var newUser = req.body;
+
+        userModel
+            .updateUser(userId,newUser)
+            .then(status => {
+                res.send(status)
+            });
+    }
 
   function findAllUsers(req,res) {
     userModel.findAllUsers()
