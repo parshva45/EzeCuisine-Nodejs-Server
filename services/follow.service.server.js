@@ -9,11 +9,11 @@ module.exports = function (app) {
     app.get('/api/user/following', getFollowingForCurrentUser);
     app.get('/api/user/followers', getFollowersForCurrentUser);
 
-    function followUser(req,res){
+    function followUser(req, res) {
         var toUserId = req.params['userId'];
         var currentUser = req.session.currentUser;
         var fromUserId = currentUser._id;
-        var follow ={
+        var follow = {
             from: fromUserId,
             to: toUserId
         }
@@ -22,11 +22,11 @@ module.exports = function (app) {
             .then(response => res.json(response));
     }
 
-    function unfollowUser(req,res) {
+    function unfollowUser(req, res) {
         var toUserId = req.params['userId'];
         var currentUser = req.session.currentUser;
         var fromUserId = currentUser._id;
-        var unfollow ={
+        var unfollow = {
             from: fromUserId,
             to: toUserId
         }
@@ -35,14 +35,14 @@ module.exports = function (app) {
             .then(response => res.json(response));
     }
 
-    function getFollowing(req,res) {
+    function getFollowing(req, res) {
         var userId = req.params['userId'];
         followModel
             .getFollowing(userId)
             .then(following => res.json(following));
     }
 
-    function getFollowingForCurrentUser(req,res) {
+    function getFollowingForCurrentUser(req, res) {
         var currentUser = req.session['currentUser'];
         var userId = currentUser._id;
         followModel
@@ -50,18 +50,18 @@ module.exports = function (app) {
             .then(following => res.json(following));
     }
 
-    function getFollowers(req,res) {
+    function getFollowers(req, res) {
         var userId = req.params['userId'];
         followModel
             .getFollowers(userId)
-            .then(followers=> res.json(followers));
+            .then(followers => res.json(followers));
     }
 
-    function getFollowersForCurrentUser(req,res) {
+    function getFollowersForCurrentUser(req, res) {
         var currentUser = req.session['currentUser'];
         var userId = currentUser._id;
         followModel
             .getFollowers(userId)
-            .then(followers=> res.json(followers));
+            .then(followers => res.json(followers));
     }
 }

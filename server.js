@@ -3,18 +3,17 @@ var bodyParser = require('body-parser');
 var app = express()
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://heroku_rpffmd6b:1hs699jm9ge6ugk7nsqe1afkr0@ds163410.mlab.com:63410/heroku_rpffmd6b');
-// mongoose.connect('mongodb://localhost/eze-cuisine')
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     var allowedOrigins = [
         "http://localhost:4200",
         "https://eze-cuisine-angular-client.herokuapp.com"
     ];
     var origin = req.headers.origin;
-    if(allowedOrigins.indexOf(origin) > -1){
+    if (allowedOrigins.indexOf(origin) > -1) {
         res.setHeader('Access-Control-Allow-Origin', origin);
     }
     res.header("Access-Control-Allow-Headers",

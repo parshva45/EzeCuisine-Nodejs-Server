@@ -46,7 +46,7 @@ function deleteRecipe(recipeId) {
 function updateRecipe(recipeId, newRecipe) {
     return recipeModel.update({
         _id: recipeId
-    },{
+    }, {
         $set: {
             name: newRecipe['name'],
             ingredients: newRecipe['ingredients'],
@@ -57,7 +57,7 @@ function updateRecipe(recipeId, newRecipe) {
     })
 }
 
-var api ={
+var api = {
     createRecipe,
     findAllRecipes,
     findRecipeByYummlyId,

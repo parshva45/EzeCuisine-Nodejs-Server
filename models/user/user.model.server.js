@@ -22,10 +22,10 @@ function findUserByUsername(username) {
     return userModel.find({username: username});
 }
 
-function updateUser(userId,newUser) {
+function updateUser(userId, newUser) {
     return userModel.update({
-        _id:userId
-    },{
+        _id: userId
+    }, {
         $set: {
             username: newUser.username,
             firstName: newUser.firstName,
@@ -40,14 +40,14 @@ function deleteUser(userId) {
     return userModel.remove({_id: userId});
 }
 
-var api ={
-  createUser,
-  findUserByCredentials,
-  updateUser,
-  findUserByUsername,
-  deleteUser,
-  findUserById,
-  findAllUsers
+var api = {
+    createUser,
+    findUserByCredentials,
+    updateUser,
+    findUserByUsername,
+    deleteUser,
+    findUserById,
+    findAllUsers
 };
 
 module.exports = api;

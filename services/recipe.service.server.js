@@ -13,13 +13,13 @@ module.exports = function (app) {
     var likeModel = require('../models/like/like.model.server');
     var ratingModel = require('../models/rating/rating.model.server');
 
-    function createRecipe(req,res) {
+    function createRecipe(req, res) {
         var recipe = req.body;
         recipeModel.createRecipe(recipe)
             .then(recipe => res.send(recipe));
     }
 
-    function deleteRecipe(req,res) {
+    function deleteRecipe(req, res) {
         var recipeId = req.params['recipeId'];
         likeModel.deleteLikesForRecipe(recipeId)
             .then(() => ratingModel.deleteRatingsForRecipe(recipeId))
@@ -27,44 +27,44 @@ module.exports = function (app) {
             .then(response => res.send(response));
     }
 
-    function updateRecipe(req,res) {
+    function updateRecipe(req, res) {
         var recipeId = req.params['recipeId'];
         var recipeObject = req.body;
-        recipeModel.updateRecipe(recipeId,recipeObject)
+        recipeModel.updateRecipe(recipeId, recipeObject)
             .then(status => res.send(status));
     }
 
-    function findAllRecipes(req,res) {
+    function findAllRecipes(req, res) {
         recipeModel.findAllRecipes()
             .then(recipes => res.send(recipes));
     }
 
-    function findAllCreatedRecipesForCurrentUser(req,res) {
+    function findAllCreatedRecipesForCurrentUser(req, res) {
         var currentUser = req.session['currentUser'];
         var userId = currentUser['_id'];
         recipeModel.findAllCreatedRecipesForUser(userId)
             .then(recipes => res.json(recipes));
     }
 
-    function findAllCreatedRecipesForUser(req,res) {
+    function findAllCreatedRecipesForUser(req, res) {
         var userId = req.params['userId'];
         recipeModel.findAllCreatedRecipesForUser(userId)
             .then(recipes => res.json(recipes))
     }
 
-    function findRecipesBySearchQuery(req,res) {
+    function findRecipesBySearchQuery(req, res) {
         var recipeSearchText = req.params['recipeSearchText'];
         recipeModel.findRecipesBySearchQuery(recipeSearchText)
             .then(recipes => res.json(recipes));
     }
 
-    function findRecipeByYummlyId(req,res) {
+    function findRecipeByYummlyId(req, res) {
         var yummlyId = req.params['yummlyId'];
         recipeModel.findRecipeByYummlyId(yummlyId)
             .then(recipe => res.send(recipe));
     }
 
-    function findRecipeById(req,res) {
+    function findRecipeById(req, res) {
         var recipeId = req.params['recipeId'];
         recipeModel.findRecipeById(recipeId)
             .then(recipe => res.send(recipe));

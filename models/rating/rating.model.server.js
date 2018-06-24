@@ -17,19 +17,19 @@ function deleteRatingsForUser(userId) {
 function updateRating(ratingId, ratingObject) {
     if (ratingObject['review']) {
         return ratingModel.update(
-            {_id: ratingId},{
-            $set: {
-                rating: ratingObject['rating'],
-                review: ratingObject['review']
-            }
-        })
+            {_id: ratingId}, {
+                $set: {
+                    rating: ratingObject['rating'],
+                    review: ratingObject['review']
+                }
+            })
     } else {
         return ratingModel.update(
-            {_id: ratingId},{
-            $set: {
-                rating: ratingObject['rating'],
-            }
-        })
+            {_id: ratingId}, {
+                $set: {
+                    rating: ratingObject['rating'],
+                }
+            })
     }
 }
 
@@ -47,7 +47,7 @@ function findRatedUsersForRecipe(recipeId) {
         .exec();
 }
 
-var api ={
+var api = {
     rateRecipe,
     findRatedRecipesForUser,
     findRatedUsersForRecipe,

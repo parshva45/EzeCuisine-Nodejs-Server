@@ -33,7 +33,7 @@ function getFollowers(userId) {
         .exec();
 }
 
-var api ={
+var api = {
     followUser,
     getFollowing,
     getFollowers,

@@ -32,7 +32,7 @@ function findLikedUsersForRecipe(recipeId) {
         .exec();
 }
 
-var api ={
+var api = {
     likeRecipe,
     findLikedRecipesForUser,
     findLikedUsersForRecipe,
